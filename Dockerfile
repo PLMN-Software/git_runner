@@ -6,6 +6,7 @@ RUN apt-get update && \
       git \
       curl \
       unzip \
+      ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Arbeitsverzeichnis für den Runner
