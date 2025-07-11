@@ -1,10 +1,22 @@
-FROM node:20-alpine
+FROM ubuntu:22.04
 
-RUN apk add --no-cache git bash
+ENV DEBIAN_FRONTEND=noninteractive
 
-WORKDIR /ci
+RUN apt-get update && apt-get install -y \
+    curl \
+    git \
+    jq \
+    ca-certificates \
+    unzip \
+    nodejs \
+    npm \
+    bash \
+    && apt-get clean
 
-COPY ci-runner.sh /usr/local/bin/ci-runner
-RUN chmod +x /usr/local/bin/ci-runner
+WORKDIR /runner
 
-ENTRYPOINT ["ci-runner"]
+COPY entrypoint.sh /entrypoint.sh
+COPY deploy.sh /deploy.sh
+RUN chmod +x /entrypoint.sh /deploy.sh
+
+ENTRYPOINT ["/entrypoint.sh"]
