@@ -1,0 +1,10 @@
+version: '3.9'
+services:
+  github-runner:
+    build: .
+    container_name: github-runner
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - ./data:/actions-runner
+    working_dir: /actions-runner
+    restart: always
