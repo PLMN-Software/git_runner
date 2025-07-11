@@ -3,10 +3,16 @@
 echo "🔧 CI-Runner startet..."
 
 # .env laden
-if [ -f .env ]; then
+# if [ -f .env ]; then
+#   export $(grep -v '^#' .env | xargs)
+# else
+#   echo "❌ .env Datei fehlt!"
+#   exit 1
+# fi
+if [ -z "$REPO_URL" ]; then
   export $(grep -v '^#' .env | xargs)
 else
-  echo "❌ .env Datei fehlt!"
+  echo "❌ please import your .env!"
   exit 1
 fi
 
