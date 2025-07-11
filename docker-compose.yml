@@ -1,9 +1,15 @@
 version: "3.9"
 
 services:
-  ci_runner:
+  github_runner:
     build: .
-    container_name: backend_api_ci
+    container_name: backend_api_dev_runner
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock  # Zugriff auf andere Container
-    restart: "no"
+      - /var/run/docker.sock:/var/run/docker.sock
+    restart: unless-stopped
+    environment:
+      # Diese Werte NICHT hier setzen – über Portainer einfügen!
+      # GITHUB_URL: z.B. https://github.com/deine-org/backend_api_dev
+      # GITHUB_TOKEN: dein Runner-Token
+      # DEST_CONTAINER: backend_api_dev_web
+      # DEST_PATH: /app
