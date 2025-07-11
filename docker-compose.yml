@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   github_runner:
-    build: .
+    image: backend_api_dev_runner
     container_name: backend_api_dev_runner
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
