@@ -12,6 +12,7 @@ if [ -S "$DOCKER_SOCK" ]; then
   usermod -aG docker $(whoami)
 fi
 # --- Ende GID-FIX ---
+exec su - runneruser -c 
 
 echo "▶️ Starte GitHub Runner Setup..."
 
