@@ -6,4 +6,5 @@ services:
     container_name: git_runner
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    users: root
     restart: unless-stopped
