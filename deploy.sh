@@ -25,5 +25,4 @@ else
   echo "⚠️  Kein 'dist'-Ordner gefunden, gesamtes Verzeichnis deployed."
 fi
 echo "♻️  Starte Node-Container neu..."
-docker restart "$DEST_CONTAINER"
 echo "🎉 Deployment abgeschlossen"
