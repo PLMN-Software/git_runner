@@ -27,16 +27,19 @@ RUN ./bin/installdependencies.sh
 # Jest installieren (global)
 RUN npm install -g jest
 
-# Benutzer anlegen, damit der Runner nicht als root läuft
-RUN useradd -m runneruser && \
-    chown -R runneruser:runneruser /runner
 
 # Wechsle zum neuen Benutzer
-USER runneruser
 
 # Entrypoint-Skript kopieren
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+
+# Benutzer anlegen, damit der Runner nicht als root läuft
+RUN useradd -m runneruser && \
+    chown -R runneruser:runneruser /runner
+USER runneruser
+
+
 
 # Entrypoint setzen
 ENTRYPOINT ["/entrypoint.sh"]
