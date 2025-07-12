@@ -6,4 +6,5 @@ services:
     container_name: git_runner
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
+    user: root   # 🧠 Wichtig! root oder explizit Zugriff auf den Socket erlauben      
     restart: unless-stopped
