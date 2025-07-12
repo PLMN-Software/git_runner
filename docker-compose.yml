@@ -7,3 +7,9 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     restart: unless-stopped
+    environment:
+      GITHUB_PAT: ${GITHUB_PAT}
+      GITHUB_ORG: ${GITHUB_ORG}
+      RUNNER_NAME: ${RUNNER_NAME}
+      RUNNER_LABELS: ${ci}
+      RUNNER_WORKDIR: ${RUNNER_WORKDIR}
