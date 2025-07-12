@@ -35,6 +35,7 @@ RUN npm install -g jest
 
 # Entrypoint-Skript kopieren
 COPY entrypoint.sh /entrypoint.sh
+COPY entrypoint-user.sh /entrypoint-user.sh
 RUN chmod +x /entrypoint.sh
 
 
