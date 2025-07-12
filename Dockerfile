@@ -7,6 +7,7 @@ RUN apt-get update && \
       curl \
       unzip \
       ca-certificates \
+      jest \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Arbeitsverzeichnis setzen
@@ -41,6 +42,6 @@ RUN useradd -m runneruser && \
 USER runneruser
 
 
-
+RUN npm init
 # Entrypoint setzen
 ENTRYPOINT ["/entrypoint.sh"]
