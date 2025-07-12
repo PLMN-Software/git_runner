@@ -15,4 +15,4 @@ fi
 
 # Rest wie gehabt...
 echo "🔄 Wechsle jetzt zu runneruser…"
-exec gosu runneruser /runner/entrypoint-user.sh
+exec gosu runneruser /entrypoint-user.sh
