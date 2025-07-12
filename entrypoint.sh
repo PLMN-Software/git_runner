@@ -2,6 +2,17 @@
 
 set -e
 
+# --- GID-FIX für Docker-Socket ---
+DOCKER_SOCK="/var/run/docker.sock"
+if [ -S "$DOCKER_SOCK" ]; then
+  DOCKER_GID=$(stat -c '%g' $DOCKER_SOCK)
+  if ! getent group docker | grep -q ":$DOCKER_GID:"; then
+    groupadd -for -g "$DOCKER_GID" docker
+  fi
+  usermod -aG docker $(whoami)
+fi
+# --- Ende GID-FIX ---
+
 echo "▶️ Starte GitHub Runner Setup..."
 
 # Stelle sicher, dass die Umgebungsvariablen gesetzt sind
