@@ -9,6 +9,7 @@ RUN apt-get update && \
       ca-certificates \
       docker.io \
       jq \
+      gosu \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Arbeitsverzeichnis setzen
