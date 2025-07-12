@@ -14,7 +14,7 @@ if [ -S "$DOCKER_SOCK" ]; then
 fi
 
 # Jetzt zu runneruser wechseln:
-exec gosu runneruser /entrypoint-user.sh
+exec gosu runneruser /entrypoint.sh
 
 
 echo "▶️ Starte GitHub Runner Setup..."
