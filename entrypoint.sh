@@ -3,14 +3,7 @@ set -e
 
 echo "▶️ Starte GitHub Runner Setup..."
 
-./config.sh \
-  --url "$GITHUB_URL" \
-  --token "$GITHUB_TOKEN" \
-  --name "$RUNNER_NAME" \
-  --labels "$RUNNER_LABELS" \
-  --work "$RUNNER_WORKDIR" \
-  --unattended \
-  --replace
+./config.sh --url "$GITHUB_URL" --token "$GITHUB_TOKEN" --name "$RUNNER_NAME" --unattended
 
 echo "✅ Runner registriert. Starte..."
 
