@@ -1,29 +1,13 @@
 #!/bin/bash
-
 set -e
 
-: "${GITHUB_URL:?Fehlende Variable: GITHUB_URL}"
-: "${GITHUB_TOKEN:?Fehlende Variable: GITHUB_TOKEN}"
-: "${RUNNER_NAME:=frank-ci-runner}"
-: "${RUNNER_LABELS:=self-hosted,ci}"
-: "${RUNNER_WORKDIR:=_work}"
+echo "▶️ Starte GitHub Runner Setup..."
 
-cd /runner
+#./config.sh --url "$GITHUB_URL" --token "$GITHUB_TOKEN" --name "$RUNNER_NAME" --unattended
+./config.sh --url https://github.com/PLMN-Software --token AD4MM353JMNUB7MDFE2ZIC3IOG4HC --name "PLMN-dev-001" --unattended
 
-if [ ! -f ./config.sh ]; then
-  echo "📥 Lade GitHub Runner..."
-  curl -o actions-runner.tar.gz -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64-2.316.0.tar.gz
-  tar xzf actions-runner.tar.gz
-  rm actions-runner.tar.gz
-fi
 
-./config.sh \
-  --unattended \
-  --url "$GITHUB_URL" \
-  --token "$GITHUB_TOKEN" \
-  --name "$RUNNER_NAME" \
-  --labels "$RUNNER_LABELS" \
-  --work "$RUNNER_WORKDIR"
+echo "✅ Runner registriert. Starte..."
 
-echo "✅ Runner konfiguriert. Starte..."
+# Starte den Runner (wird aktiv auf GitHub Events lauschen)
 exec ./run.sh
