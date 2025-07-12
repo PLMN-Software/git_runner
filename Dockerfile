@@ -1,6 +1,6 @@
 FROM node:20-slim
 
-# Minimale Pakete installieren
+# Installiere benötigte Pakete
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
       git \
@@ -9,27 +9,34 @@ RUN apt-get update && \
       ca-certificates \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Arbeitsverzeichnis für den Runner
+# Arbeitsverzeichnis setzen
 WORKDIR /runner
 
-# Aktuelle Runner-Version herunterladen und entpacken
+# Runner-Version definieren
 ARG RUNNER_VERSION=2.326.0
 
+# Runner herunterladen und entpacken
 RUN curl -L -o actions-runner.tar.gz \
     https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner.tar.gz && \
     rm actions-runner.tar.gz
 
-# ... Rest bleibt unverändert ...
-
-# Runner-Abhängigkeiten installieren
+# Abhängigkeiten für den Runner installieren
 RUN ./bin/installdependencies.sh
 
-# Jest installieren
+# Jest installieren (global)
 RUN npm install -g jest
 
-# Entrypoint-Skript einfügen
+# Benutzer anlegen, damit der Runner nicht als root läuft
+RUN useradd -m runneruser && \
+    chown -R runneruser:runneruser /runner
+
+# Wechsle zum neuen Benutzer
+USER runneruser
+
+# Entrypoint-Skript kopieren
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 
+# Entrypoint setzen
 ENTRYPOINT ["/entrypoint.sh"]
