@@ -13,10 +13,14 @@ RUN apt-get update && \
 WORKDIR /runner
 
 # Aktuelle Runner-Version herunterladen und entpacken
-RUN curl -L https://github.com/actions/runner/releases/latest/download/actions-runner-linux-x64-2.317.0.tar.gz \
-    -o actions-runner.tar.gz && \
+ARG RUNNER_VERSION=2.326.0
+
+RUN curl -L -o actions-runner.tar.gz \
+    https://github.com/actions/runner/releases/download/v${RUNNER_VERSION}/actions-runner-linux-x64-${RUNNER_VERSION}.tar.gz && \
     tar xzf actions-runner.tar.gz && \
     rm actions-runner.tar.gz
+
+# ... Rest bleibt unverändert ...
 
 # Runner-Abhängigkeiten installieren
 RUN ./bin/installdependencies.sh
