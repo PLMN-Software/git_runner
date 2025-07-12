@@ -10,6 +10,7 @@ RUN apt-get update && \
       docker.io \
       jq \
       gosu \
+      rsync \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Arbeitsverzeichnis setzen
