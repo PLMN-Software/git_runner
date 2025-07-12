@@ -33,6 +33,7 @@ RUN npm install -g jest
 # Entrypoint-Skript kopieren
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+RUN chmod +x /deploy.sh
 
 # Benutzer anlegen, damit der Runner nicht als root läuft
 RUN useradd -m runneruser && \
