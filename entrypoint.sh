@@ -1,18 +1,21 @@
 #!/bin/bash
 
+#!/bin/bash
 set -e
 
-# --- GID-FIX für Docker-Socket ---
+# GID-Fix für Docker-Socket
 DOCKER_SOCK="/var/run/docker.sock"
 if [ -S "$DOCKER_SOCK" ]; then
   DOCKER_GID=$(stat -c '%g' $DOCKER_SOCK)
   if ! getent group docker | grep -q ":$DOCKER_GID:"; then
     groupadd -for -g "$DOCKER_GID" docker
   fi
-  usermod -aG docker $(whoami)
+  usermod -aG docker runneruser
 fi
-# --- Ende GID-FIX ---
-exec su - runneruser -c 
+
+# Jetzt zu runneruser wechseln:
+exec gosu runneruser /runner/entrypoint-user.sh
+
 
 echo "▶️ Starte GitHub Runner Setup..."
 
