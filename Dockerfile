@@ -37,6 +37,8 @@ RUN npm install -g jest
 COPY entrypoint.sh /entrypoint.sh
 COPY entrypoint-user.sh /entrypoint-user.sh
 RUN chmod +x /entrypoint.sh
+RUN chmod +x /runner/entrypoint-user.sh
+
 
 
 # Benutzer anlegen, damit der Runner nicht als root läuft
@@ -46,7 +48,7 @@ RUN useradd -m runneruser && \
 RUN groupadd docker || true
 # Nach dem Erstellen von runneruser
 RUN usermod -aG docker runneruser
-RUN npm init
+
 
     
 
