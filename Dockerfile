@@ -8,6 +8,7 @@ RUN apt-get update && \
       unzip \
       ca-certificates \
       docker.io \
+      jq \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
 # Arbeitsverzeichnis setzen
