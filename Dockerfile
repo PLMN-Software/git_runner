@@ -29,7 +29,7 @@ RUN curl -L -o actions-runner.tar.gz \
 RUN ./bin/installdependencies.sh
 
 # Jest installieren (global)
-RUN npm install -g jest
+RUN npm install -g jest supertest
 
 
 # Wechsle zum neuen Benutzer
