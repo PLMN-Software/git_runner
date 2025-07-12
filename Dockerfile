@@ -39,6 +39,12 @@ RUN chmod +x /entrypoint.sh
 # Benutzer anlegen, damit der Runner nicht als root läuft
 RUN useradd -m runneruser && \
     chown -R runneruser:runneruser /runner
+
+RUN groupadd docker || true
+# Nach dem Erstellen von runneruser
+RUN usermod -aG docker runneruser
+
+    
 USER runneruser
 
 
