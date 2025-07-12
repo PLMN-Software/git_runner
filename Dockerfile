@@ -48,7 +48,6 @@ RUN usermod -aG docker runneruser
 RUN npm init
 
     
-USER runneruser
 
 
 # Entrypoint setzen
