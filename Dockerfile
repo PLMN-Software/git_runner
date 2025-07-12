@@ -44,11 +44,11 @@ RUN useradd -m runneruser && \
 RUN groupadd docker || true
 # Nach dem Erstellen von runneruser
 RUN usermod -aG docker runneruser
+RUN npm init
 
     
 USER runneruser
 
 
-RUN npm init
 # Entrypoint setzen
 ENTRYPOINT ["/entrypoint.sh"]
